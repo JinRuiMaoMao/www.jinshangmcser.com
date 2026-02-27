@@ -62,574 +62,642 @@
             }
         }
     </style>
+    <!-- 平滑滚动 -->
+<style>
+
+section {
+    scroll-margin-top: 80px; /* 避免被固定导航栏遮挡 */
+}
+</style>
+
 </head>
 <body class="bg-mtr-dark text-white overflow-x-hidden">
-    <!-- 导航栏 -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-mtr-dark/90 backdrop-blur-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="./static/png/logo.png" alt="MTR标志" class="h-10 mr-3">
-                <span class="text-xl font-bold text-mtr-orange">金尚市轨交官网 |  JTR Official Website</span>
+
+<!-- 导航栏 -->
+<nav id="navbar" class="fixed w-full z-50 bg-mtr-dark/90 backdrop-blur-md shadow-md">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    
+    <!-- 左侧 Logo + 文字 -->
+    <a href="#home" class="flex items-center space-x-3">
+      <img src="./static/png/logo.png" alt="MTR标志" class="h-10">
+      <span class="text-xl font-bold text-mtr-orange"
+            data-lang-zh="金尚市轨交官网"
+            data-lang-en="JTR Official Website">
+        金尚市轨交官网
+      </span>
+    </a>
+
+    <!-- 中间菜单（桌面端显示） -->
+    <div class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2">
+      <!--<a href="#home" class="hover:text-mtr-orange transition-colors">首页</a>-->
+      <a href="#about" class="hover:text-mtr-orange transition-colors">关于MTR</a>
+      <a href="#status" class="hover:text-mtr-orange transition-colors">服务器状态</a>
+      <a href="#join" class="hover:text-mtr-orange transition-colors">加入我们</a>
+      <a href="#context" class="hover:text-mtr-orange transition-colors">联系我们</a>
+    </div>
+
+    <!-- 右侧：语言切换 + 移动端汉堡按钮 -->
+    <div class="flex items-center space-x-3">
+      <!-- 语言切换 -->
+      <div class="relative inline-block text-left">
+        <button id="language-btn" class="bg-mtr-orange hover:bg-orange-600 px-3 py-1 rounded font-semibold text-sm">
+          语言 | Language
+        </button>
+        <div id="language-menu" class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-mtr-gray ring-1 ring-black ring-opacity-5 hidden">
+          <div class="py-1">
+            <a href="#" data-lang="zh" class="block px-4 py-2 text-white hover:bg-mtr-orange">中文</a>
+            <a href="#" data-lang="en" class="block px-4 py-2 text-white hover:bg-mtr-orange">English</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 移动端汉堡按钮 -->
+      <button id="menuToggle" class="md:hidden text-white">
+        <i class="fa fa-bars text-2xl"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- 移动端菜单（下拉） -->
+  <div id="mobileMenu" class="hidden md:hidden bg-mtr-dark/95 backdrop-blur-md border-t border-mtr-orange/30">
+    <div class="container mx-auto px-4 py-3 flex flex-col items-center space-y-4">
+      <a href="#home" class="hover:text-mtr-orange transition-colors py-2">首页</a>
+      <a href="#about" class="hover:text-mtr-orange transition-colors py-2">关于MTR</a>
+      <a href="#status" class="hover:text-mtr-orange transition-colors py-2">服务器状态</a>
+      <a href="#join" class="hover:text-mtr-orange transition-colors py-2">加入我们</a>
+      <a href="#contact" class="hover:text-mtr-orange transition-colors py-2">联系我们</a>
+      <select id="mobileLanguageSwitch" class="bg-mtr-dark border border-mtr-orange text-white rounded px-2 py-1 mt-2">
+        <option value="zh-CN">中文</option>
+        <option value="en-US">English</option>
+      </select>
+    </div>
+  </div>
+</nav>
+
+<!-- 英雄区域 -->
+<section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="./static/png/mainpic.png" alt="MTR轨道交通背景" class="w-full h-full object-cover" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-b from-mtr-dark/60 via-mtr-dark/70 to-mtr-dark"></div>
+    </div>
+    
+    <div class="absolute bottom-0 left-0 w-full h-16 track-animation z-10 opacity-70"></div>
+    
+    <div class="container mx-auto px-4 z-20 text-center">
+        <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-6 text-shadow leading-tight">
+            <span class="text-mtr-orange" data-lang-zh="MTR" data-lang-en="MTR">MTR</span>
+            <span class="text-white" data-lang-zh="金尚市轨交" data-lang-en="Jinshang Transit Railway">金尚市轨交</span>
+        </h1>
+        <p class="text-[clamp(1rem,3vw,1.5rem)] mb-10 max-w-2xl mx-auto text-shadow"
+           data-lang-zh="打造我的世界中最真实的轨道交通体验"
+           data-lang-en="Create the most realistic rail transit experience in Minecraft">
+           打造我的世界中最真实的轨道交通体验
+        </p>
+        <a href="#join" class="inline-block bg-mtr-orange hover:bg-mtr-darkorange text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg"
+           data-lang-zh="立即加入"
+           data-lang-en="Join Now">
+           立即加入<i class="fa fa-subway ml-2"></i>
+        </a>
+    </div>
+</section>
+
+ <!-- 关于MTR -->
+<section id="about" class="py-20 bg-gradient-to-b from-mtr-dark to-mtr-gray/20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange"
+                data-lang-zh="关于MTR"
+                data-lang-en="About MTR">
+                关于MTR
+            </h2>
+            <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
+            <p class="mt-4 max-w-2xl mx-auto"
+               data-lang-zh="Minecraft Transit Railway 打造逼真的轨道交通系统"
+               data-lang-en="Minecraft Transit Railway creates a realistic rail transit system">
+               Minecraft Transit Railway 打造逼真的轨道交通系统
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <img src="./static/png/station.png" alt="MTR车站场景" class="w-full h-full object-cover" loading="lazy">
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="hover:text-mtr-orange transition-colors">首页 | Home</a>
-                <a href="#about" class="hover:text-mtr-orange transition-colors">关于MTR | About MTR</a>
-                <a href="#status" class="hover:text-mtr-orange transition-colors">服务器状态 | Server Status</a>
-                <a href="#join" class="hover:text-mtr-orange transition-colors">加入我们 | Join Us</a>
-                <a href="#contect" class="hover:text-mtr-orange transition-colors">联系我们 | Context Us</a>
+
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-mtr-orange"
+                    data-lang-zh="什么是MTR?"
+                    data-lang-en="What is MTR?">
+                    什么是MTR?
+                </h3>
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="Minecraft Transit Railway（简称 MTR）是一款致力于在《我的世界》中重现真实轨道交通体验的模组。通过它，玩家不仅可以建造铁路线路，更能实现自动化运行的地铁、城际列车与轻轨系统。列车可根据设定自动进站、发车，并支持显示屏、广播、时刻表、信号系统等多种真实元素，让城市交通在方块世界中焕发生机。"
+                   data-lang-en="Minecraft Transit Railway (MTR) is a mod dedicated to creating a realistic railway and metro system inside Minecraft. With this mod, players can design and operate fully functional transit systems — including automated trains, signaling, announcements, real-time displays, and timetables — all working together to bring modern urban transport into the blocky world.">
+                   Minecraft Transit Railway（简称 MTR）是一款致力于在《我的世界》中重现真实轨道交通体验的模组。
+                </p>
+
+                <h3 class="text-2xl font-bold mb-6 text-mtr-orange"
+                    data-lang-zh="我们的世界"
+                    data-lang-en="Our World">
+                    我们的世界
+                </h3>
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="在金尚市，这一模组被充分运用到极致。我们的服务器以 MTR 为核心，构建了一个庞大、复杂、且不断扩展的轨道交通网络。这里的每一条线路、每一个车站、每一辆列车都由玩家亲手设计、精心打造。"
+                   data-lang-en="In JinShang, the MTR mod has been developed to its full potential. Our server is built around this mod, featuring a massive and intricate rail network that continues to grow. Every line, every station, and every train is carefully crafted by our players with creativity and precision.">
+                   在金尚市，这一模组被充分运用到极致。
+                </p>
+
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="无论是繁忙的市中心地铁、宁静的郊区支线，还是穿越高架的观光线路，玩家都能感受到接近现实都市的出行体验。"
+                   data-lang-en="From bustling metro lines in the downtown area to peaceful suburban routes and scenic elevated railways, players can experience a transport system that feels truly alive.">
+                   无论是繁忙的市中心地铁、宁静的郊区支线，还是穿越高架的观光线路，玩家都能感受到接近现实都市的出行体验。
+                </p>
+
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="• 真实车站设计：还原现实地铁的建筑风格与结构布局。"
+                   data-lang-en="• Realistic Station Design: Architecture and layouts inspired by real-world metro systems.">
+                   • 真实车站设计：还原现实地铁的建筑风格与结构布局。
+                </p>
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="• 多样列车型号：涵盖市域、城际、机场快线等不同类型。"
+                   data-lang-en="• Variety of Train Models: From city metros to intercity and airport express lines.">
+                   • 多样列车型号：涵盖市域、城际、机场快线等不同类型。
+                </p>
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="• 精准时刻系统：自动化运营、定点发车，让地铁如同现实般运行。"
+                   data-lang-en="• Accurate Timetables: Automated operations ensure punctual arrivals and departures.">
+                   • 精准时刻系统：自动化运营、定点发车，让地铁如同现实般运行。
+                </p>
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="• 完善换乘网络：多线互通，轻松换乘，体验高效便捷的出行。"
+                   data-lang-en="• Comprehensive Transfer Network: Multiple lines interconnect seamlessly for smooth transfers.">
+                   • 完善换乘网络：多线互通，轻松换乘，体验高效便捷的出行。
+                </p>
+
+                <p class="mb-4 leading-relaxed"
+                   data-lang-zh="在金尚市，地铁不仅是一种交通方式，更是一种艺术与工程的结合。这里汇聚了热爱建筑、城市规划与交通系统的玩家，共同打造一个充满未来感与秩序之美的虚拟都市轨道世界。"
+                   data-lang-en="In JinShang, the metro is more than just a means of transportation — it’s a fusion of engineering, creativity, and urban design. Our community brings together players passionate about architecture, city planning, and transportation, building a futuristic and well-ordered virtual metropolis powered by MTR.">
+                   在金尚市，地铁不仅是一种交通方式，更是一种艺术与工程的结合。
+                </p>
+
+                <!-- 特性卡片 -->
+                <div class="mt-8 grid grid-cols-2 gap-4">
+                    <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
+                        <i class="fa fa-subway text-mtr-orange text-2xl mb-2"></i>
+                        <h4 class="font-bold mb-1" data-lang-zh="真实体验" data-lang-en="Real experience">真实体验</h4>
+                        <p class="text-sm" data-lang-zh="模拟真实地铁系统的运行逻辑" data-lang-en="Simulate the operating logic of a real subway system">模拟真实地铁系统的运行逻辑</p>
+                    </div>
+                    <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
+                        <i class="fa fa-map-signs text-mtr-orange text-2xl mb-2"></i>
+                        <h4 class="font-bold mb-1" data-lang-zh="庞大网络" data-lang-en="Large network">庞大网络</h4>
+                        <p class="text-sm" data-lang-zh="多条线路覆盖整个游戏世界" data-lang-en="Multiple lines covering the entire game world">多条线路覆盖整个游戏世界</p>
+                    </div>
+                    <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
+                        <i class="fa fa-users text-mtr-orange text-2xl mb-2"></i>
+                        <h4 class="font-bold mb-1" data-lang-zh="协作建设" data-lang-en="Collaborative Construction">协作建设</h4>
+                        <p class="text-sm" data-lang-zh="玩家共同参与扩展铁路网络" data-lang-en="Players jointly participate in expanding the railway network">玩家共同参与扩展铁路网络</p>
+                    </div>
+                    <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
+                        <i class="fa fa-cogs text-mtr-orange text-2xl mb-2"></i>
+                        <h4 class="font-bold mb-1" data-lang-zh="技术挑战" data-lang-en="Technical Challenges">技术挑战</h4>
+                        <p class="text-sm" data-lang-zh="红石与命令方块的完美结合" data-lang-en="The perfect combination of redstone and command blocks">红石与命令方块的完美结合</p>
+                    </div>
+                </div>
             </div>
-            <button class="md:hidden text-2xl text-mtr-orange" id="menuToggle">
-                <i class="fa fa-bars"></i>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="https://alexsun114.github.io/www.jinshangrailmap.com/" class="inline-block border border-mtr-orange hover:bg-mtr-orange/20 text-white font-bold py-2 px-6 rounded-full transition-all"
+               data-lang-zh="线路图" data-lang-en="System Map">
+               线路图 <i class="fa fa-map-o ml-1"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 服务器状态 -->
+<section id="status" class="py-20 bg-mtr-dark relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange"
+                data-lang-zh="服务器状态"
+                data-lang-en="Server Status">
+                服务器状态
+            </h2>
+            <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
+            <p class="mt-4 max-w-2xl mx-auto"
+               data-lang-zh="实时监控服务器运行状态和玩家数量"
+               data-lang-en="Real-time monitoring of server operation status and number of players">
+               实时监控服务器运行状态和玩家数量
+            </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-mtr-gray/30 rounded-xl p-6 md:p-8 shadow-xl border border-mtr-orange/20">
+            <!-- 服务器状态卡片 -->
+            <div class="bg-gradient-to-br from-mtr-dark to-mtr-gray rounded-xl shadow-lg overflow-hidden mb-8 relative">
+                <!-- 背景图 -->
+                <div class="absolute inset-0 opacity-10">
+                    <img src="./static/png/background.png" alt="背景" class="w-full h-full object-cover">
+                </div>
+
+                <!-- 状态内容 -->
+                <div class="relative p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                        <!-- 服务器信息 -->
+                        <div class="flex flex-col items-center md:items-start">
+                            <div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-mtr-orange mb-4 bg-mtr-dark/50">
+                                <img src="./static/png/logo.png" alt="服务器图标" class="w-full h-full object-cover">
+                            </div>
+
+                            <div class="text-center md:text-left">
+                                <h3 class="text-2xl font-bold text-mtr-orange mb-1"
+                                    data-lang-zh="金尚市轨交 JTR Server"
+                                    data-lang-en="JinShang Transit Railway JTR Server">
+                                    金尚市轨交 JTR Server
+                                </h3>
+                                <p class="text-gray-300">kr-nc-bgp-1.ofalias.net:21468</p>
+                                <div class="flex items-center justify-center md:justify-start mt-2">
+                                    <span id="statusIndicator" class="w-3 h-3 rounded-full bg-yellow-500 mr-2 pulse"></span>
+                                    <span id="serverStatus"
+                                          data-lang-zh="正在查询..."
+                                          data-lang-en="Now Loading">
+                                        正在查询...
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 服务器详细状态 -->
+                        <div class="w-full md:w-2/3 bg-mtr-dark/40 backdrop-blur-sm rounded-lg p-4 border border-mtr-orange/20">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm"
+                                       data-lang-zh="在线玩家"
+                                       data-lang-en="Online Player">
+                                        在线玩家
+                                    </p>
+                                    <p id="playerCount" class="text-xl font-bold">--/--</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm"
+                                       data-lang-zh="延迟"
+                                       data-lang-en="Latency">
+                                        延迟
+                                    </p>
+                                    <p id="pingTime" class="text-xl font-bold">-- ms</p>
+                                </div>
+                            </div>
+
+                            <!-- 玩家进度条 -->
+                            <div class="mb-4">
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div id="playerBar" class="h-full bg-mtr-orange rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <!-- 版本信息 -->
+                            <div class="flex justify-between text-sm text-gray-400">
+                                <span data-lang-zh="版本: 1.20.1Forge"
+                                      data-lang-en="Version: 1.20.1Forge">
+                                    版本: 1.20.1Forge
+                                </span>
+                                <span id="lastUpdated"
+                                      data-lang-zh="最后更新: --"
+                                      data-lang-en="Last Updated: --">
+                                    最后更新: --
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 在线玩家列表 -->
+                    <div class="mt-6 bg-mtr-dark/30 backdrop-blur-sm rounded-lg p-4 border border-mtr-orange/20">
+                        <h4 class="font-bold text-mtr-orange mb-2 flex items-center">
+                            <i class="fa fa-users mr-2"></i>
+                            <span data-lang-zh="在线玩家" data-lang-en="Online Player">
+                                在线玩家
+                            </span>
+                        </h4>
+                        <div id="playerList" class="flex flex-wrap gap-2">
+                            <span data-lang-zh="加载中..." data-lang-en="Loading..." class="text-gray-400 text-sm">
+                                加载中...
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 刷新按钮 -->
+            <button id="refreshStatus" class="w-full bg-mtr-orange hover:bg-mtr-darkorange text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center"
+                    data-lang-zh="刷新状态"
+                    data-lang-en="Refresh Status">
+                <i class="fa fa-refresh mr-2"></i> 刷新状态
             </button>
         </div>
-        
-        <!-- 移动端菜单 -->
-        <div id="mobileMenu" class="hidden md:hidden bg-mtr-dark/95 backdrop-blur-md border-t border-mtr-orange/30">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
-                <a href="#home" class="hover:text-mtr-orange transition-colors py-2">首页 | Home</a>
-                <a href="#about" class="hover:text-mtr-orange transition-colors py-2">关于MTR | About MTR</a>
-                <a href="#status" class="hover:text-mtr-orange transition-colors py-2">服务器状态 | Server Status</a>
-                <a href="#join" class="hover:text-mtr-orange transition-colors py-2">加入我们 | Join Us</a>
-                <a href="#contect" class="hover:text-mtr-orange transition-colors">联系我们 | Context Us</a>
+    </div>
+</section>
+
+<!-- 加入我们 -->
+<section id="join" class="py-20 bg-gradient-to-b from-mtr-gray/40 to-mtr-dark">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange"
+                data-lang-zh="加入我们"
+                data-lang-en="Join Us">
+                加入我们
+            </h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-mtr-gray/30 rounded-2xl p-8 md:p-12 shadow-2xl border border-mtr-orange/20">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-mtr-orange"
+                        data-lang-zh="服务器信息"
+                        data-lang-en="Server Information">
+                        服务器信息
+                    </h3>
+
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-server text-mtr-orange mr-3 w-5 text-center"></i>
+                            <span class="font-bold" data-lang-zh="服务器IP" data-lang-en="Server IP">服务器IP</span>:
+                        </div>
+                        <div class="ml-8 bg-mtr-dark p-3 rounded-lg border-l-4 border-mtr-orange">
+                            <p class="server-ip font-mono cursor-pointer hover:text-mtr-orange transition-colors">
+    kr-nc-bgp-1.ofalias.net:21468
+</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 ml-8">
+                        <p data-lang-zh="Minecraft Transit Railway" data-lang-en="Minecraft Transit Railway">Minecraft Transit Railway</p>
+                        <p class="text-sm text-gray-400" data-lang-zh="版本: 4.0.2HotFix" data-lang-en="Version: 4.0.2HotFix">版本: 4.0.2HotFix</p>
+                    </div>
+
+                    <div class="mb-6 ml-8">
+                        <p data-lang-zh="游戏版本" data-lang-en="Game Version">游戏版本</p>
+                        <p class="text-sm text-gray-400" data-lang-zh="1.20.1 Forge" data-lang-en="1.20.1 Forge">1.20.1 Forge</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-mtr-orange"
+                        data-lang-zh="加入步骤"
+                        data-lang-en="How To Join?">
+                        加入步骤
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">1</div>
+                            <div>
+                                <h4 class="font-bold mb-1" data-lang-zh="前往Modrinth下载Mod" data-lang-en="Go to Modrinth to download the mod">前往Modrinth下载Mod</h4>
+                                <a class="inline-block border border-mtr-orange hover:bg-mtr-orange/20 text-white font-bold py-2 px-6 rounded-full transition-all"
+                                   href="https://modrinth.com/modpack/mtr-urban-construction"
+                                   data-lang-zh="点击下载" data-lang-en="Download">点击下载</a>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">2</div>
+                            <div>
+                                <p data-lang-zh="在多人游戏中添加服务器，输入我们的IP地址" data-lang-en="Add a server in multiplayer and enter our IP address">在多人游戏中添加服务器，输入我们的IP地址</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-mtr-dark rounded-lg border border-mtr-orange/30">
+                        <h4 class="font-bold mb-2 flex items-center" data-lang-zh="玩家须知" data-lang-en="Pls Note:">
+                            <i class="fa fa-info-circle text-mtr-orange mr-2"></i> 玩家须知
+                        </h4>
+                        <p class="text-sm" data-lang-zh="请遵守服务器规则，爱护公共设施，共同维护轨道交通网络的秩序和发展" data-lang-en="Please abide by the server rules, take care of public facilities, and jointly maintain the order and development of the rail transit network">
+                            请遵守服务器规则，爱护公共设施，共同维护轨道交通网络的秩序和发展
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
 
-    <!-- 英雄区域 -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="./static/png/mainpic.png" alt="MTR轨道交通背景" class="w-full h-full object-cover" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-b from-mtr-dark/60 via-mtr-dark/70 to-mtr-dark"></div>
-        </div>
-        
-        <div class="absolute bottom-0 left-0 w-full h-16 track-animation z-10 opacity-70"></div>
-        
-        <div class="container mx-auto px-4 z-20 text-center">
-            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-6 text-shadow leading-tight">
-                <span class="text-mtr-orange">MTR</span>
-                <span class="text-white">金尚市轨交</span></h1>
-                <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-6 text-shadow leading-tight">
-                <span class="text-mtr-orange">MTR</span>
-                <span class="text-white">Jinshang Transit Railway</span>
-            </h1>
-            <p class="text-[clamp(1rem,3vw,1.5rem)] mb-10 max-w-2xl mx-auto text-shadow">
-                打造我的世界中最真实的轨道交通体验
+ <!-- 联系我们 -->
+<section id="context" class="py-20 bg-gradient-to-b from-mtr-gray/40 to-mtr-dark">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange"
+                data-lang-zh="联系我们"
+                data-lang-en="Contact Us">
+                联系我们
+            </h2>
+            <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
+            <p class="mt-4 max-w-2xl mx-auto"
+               data-lang-zh="发现问题，及时汇报"
+               data-lang-en="Find problems and report them promptly">
+               发现问题，及时汇报
             </p>
-            <p class="text-[clamp(1rem,3vw,1.5rem)] mb-10 max-w-2xl mx-auto text-shadow">
-                Create the most realistic rail transit experience in Minecraft
-                </p>
-            <a href="#join" class="inline-block bg-mtr-orange hover:bg-mtr-darkorange text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg">
-                立即加入 | Join Now <i class="fa fa-subway ml-2"></i>
-            </a>
         </div>
-    </section>
 
-    <!-- 关于MTR -->
-    <section id="about" class="py-20 bg-gradient-to-b from-mtr-dark to-mtr-gray/20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange">关于MTR | About MTR</h2>
-                <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
-                <p class="mt-4 max-w-2xl mx-auto">Minecraft Transit Railway 打造逼真的轨道交通系统</p>
-                <p class="mt-4 max-w-2xl mx-auto">Minecraft Transit Railway creates a realistic rail transit system</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="max-w-4xl mx-auto bg-mtr-gray/30 rounded-2xl p-8 md:p-12 shadow-2xl border border-mtr-orange/20">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
                 <div>
-                    <img src="./static/png/station.png" alt="MTR车站场景" class="w-full h-full object-cover" loading="lazy">
+                    <h3 class="text-2xl font-bold mb-6 text-mtr-orange"
+                        data-lang-zh="加入群聊"
+                        data-lang-en="Join a group chat">
+                        加入群聊
+                    </h3>
+
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold" data-lang-zh="Discord邀请链接" data-lang-en="Discord Invite Link">Discord邀请链接</span>:
+                        </div>
+                        <div class="ml-8 bg-mtr-dark p-3 rounded-lg border-l-4 border-mtr-orange">
+                            <p class="server-ip font-mono cursor-pointer hover:text-mtr-orange transition-colors">
+    https://discord.gg/kVtBeyw5fm
+</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold" data-lang-zh="QQ邀请链接" data-lang-en="QQ Invite Link">QQ邀请链接</span>:
+                        </div>
+                        <div class="ml-8 bg-mtr-dark p-3 rounded-lg border-l-4 border-mtr-orange">
+                            <p class="server-ip font-mono cursor-pointer hover:text-mtr-orange transition-colors">
+    https://qm.qq.com/q/OCKnveZMA
+</p>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div>
-                    <h3 class="text-2xl font-bold mb-6 text-mtr-orange">什么是MTR?</h3>
-                    <p class="mb-4 leading-relaxed">
-                        Minecraft Transit Railway（简称 MTR） 是一款致力于在《我的世界》中重现真实轨道交通体验的模组。通过它，玩家不仅可以建造铁路线路，更能实现自动化运行的地铁、城际列车与轻轨系统。列车可根据设定自动进站、发车，并支持显示屏、广播、时刻表、信号系统等多种真实元素，让城市交通在方块世界中焕发生机。
-                    </p>
-                     <h3 class="text-2xl font-bold mb-6 text-mtr-orange">我们的世界</h3>
-                    <p class="mb-4 leading-relaxed">
-                        在 金尚市，这一模组被充分运用到极致。我们的服务器以 MTR 为核心，构建了一个庞大、复杂、且不断扩展的轨道交通网络。这里的每一条线路、每一个车站、每一辆列车都由玩家亲手设计、精心打造。</p>
-<p class="mb-4 leading-relaxed">
-无论是繁忙的市中心地铁、宁静的郊区支线，还是穿越高架的观光线路，玩家都能感受到接近现实都市的出行体验。</p>
-<p class="mb-4 leading-relaxed">
-• 真实车站设计：还原现实地铁的建筑风格与结构布局。</p>
-<p class="mb-4 leading-relaxed">
-• 多样列车型号：涵盖市域、城际、机场快线等不同类型。</p>
-<p class="mb-4 leading-relaxed">
-• 精准时刻系统：自动化运营、定点发车，让地铁如同现实般运行。</p>
-<p class="mb-4 leading-relaxed">
-• 完善换乘网络：多线互通，轻松换乘，体验高效便捷的出行。</p>
-<p class="mb-4 leading-relaxed">
-在金尚市，地铁不仅是一种交通方式，更是一种艺术与工程的结合。这里汇聚了热爱建筑、城市规划与交通系统的玩家，共同打造一个充满未来感与秩序之美的虚拟都市轨道世界。
-                    </p>
-                                    <div>
-                    <h3 class="text-2xl font-bold mb-6 text-mtr-orange">What is MTR?</h3>
-                    <p class="mb-4 leading-relaxed">
-        Minecraft Transit Railway (MTR) is a mod dedicated to creating a realistic railway and metro system inside Minecraft. With this mod, players can design and operate fully functional transit systems — including automated trains, signaling, announcements, real-time displays, and timetables — all working together to bring modern urban transport into the blocky world.
-                    </p>
-                     <h3 class="text-2xl font-bold mb-6 text-mtr-orange">Our World</h3>
-                    <p class="mb-4 leading-relaxed">
-               In JinShang, the MTR mod has been developed to its full potential. Our server is built around this mod, featuring a massive and intricate rail network that continues to grow. Every line, every station, and every train is carefully crafted by our players with creativity and precision.</p>
-<p class="mb-4 leading-relaxed">
-From bustling metro lines in the downtown area to peaceful suburban routes and scenic elevated railways, players can experience a transport system that feels truly alive.</p>
-<p class="mb-4 leading-relaxed">
-• Realistic Station Design: Architecture and layouts inspired by real-world metro systems.</p>
-<p class="mb-4 leading-relaxed">
-• Variety of Train Models: From city metros to intercity and airport express lines.</p>
-<p class="mb-4 leading-relaxed">
-• Accurate Timetables: Automated operations ensure punctual arrivals and departures.</p>
-<p class="mb-4 leading-relaxed">
-• Comprehensive Transfer Network: Multiple lines interconnect seamlessly for smooth transfers.</p>
-<p class="mb-4 leading-relaxed">
-In JinShang, the metro is more than just a means of transportation — it’s a fusion of engineering, creativity, and urban design. Our community brings together players passionate about architecture, city planning, and transportation, building a futuristic and well-ordered virtual metropolis powered by MTR.
-                    </p>
-                    <div class="mt-8 grid grid-cols-2 gap-4">
-                        <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
-                            <i class="fa fa-subway text-mtr-orange text-2xl mb-2"></i>
-                            <h4 class="font-bold mb-1">真实体验 | Real experience</h4>
-                            <p class="text-sm">模拟真实地铁系统的运行逻辑 | Simulate the operating logic of a real subway system</p>
-                        </div>
-                        <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
-                            <i class="fa fa-map-signs text-mtr-orange text-2xl mb-2"></i>
-                            <h4 class="font-bold mb-1">庞大网络 | Large network</h4>
-                            <p class="text-sm">多条线路覆盖整个游戏世界 | Multiple lines covering the entire game world</p>
-                        </div>
-                        <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
-                            <i class="fa fa-users text-mtr-orange text-2xl mb-2"></i>
-                            <h4 class="font-bold mb-1">协作建设 | Collaborative Construction</h4>
-                            <p class="text-sm">玩家共同参与扩展铁路网络 | Players jointly participate in expanding the railway network</p>
-                        </div>
-                        <div class="bg-mtr-gray/20 p-4 rounded-lg border border-mtr-orange/30">
-                            <i class="fa fa-cogs text-mtr-orange text-2xl mb-2"></i>
-                            <h4 class="font-bold mb-1">技术挑战 | Technical Challenges</h4>
-                            <p class="text-sm">红石与命令方块的完美结合 | The perfect combination of redstone and command blocks</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-12 text-center">
-            <a href="https://alexsun114.github.io/www.jinshangrailmap.com/" class="inline-block border border-mtr-orange hover:bg-mtr-orange/20 text-white font-bold py-2 px-6 rounded-full transition-all">
-                线路图 | System Map <i class="fa fa-map-o ml-1"></i>
-            </a>
-        </div>
-    </section>
+                    <h3 class="text-2xl font-bold mb-6 text-mtr-orange"
+                        data-lang-zh="加入步骤"
+                        data-lang-en="How To Join?">
+                        加入步骤
+                    </h3>
 
-    <!-- 服务器状态 -->
-    <section id="status" class="py-20 bg-mtr-dark relative">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange">服务器状态 | Server Status</h2>
-                <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
-                <p class="mt-4 max-w-2xl mx-auto">实时监控服务器运行状态和玩家数量</p>
-                <p class="mt-4 max-w-2xl mx-auto">Real-time monitoring of server operation status and number of players</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto bg-mtr-gray/30 rounded-xl p-6 md:p-8 shadow-xl border border-mtr-orange/20">
-                <!-- 服务器状态卡片 -->
-                <div class="bg-gradient-to-br from-mtr-dark to-mtr-gray rounded-xl shadow-lg overflow-hidden mb-8">
-                    <!-- 背景图 -->
-                    <div class="absolute inset-0 opacity-10">
-                        <img src="./static/png/background.png" alt="背景" class="w-full h-full object-cover">
-                    </div>
-                    
-                    <!-- 状态内容 -->
-                    <div class="relative p-6 md:p-8">
-                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
-                            <!-- 服务器信息 -->
-                            <div class="flex flex-col items-center md:items-start">
-                                <div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-mtr-orange mb-4 bg-mtr-dark/50">
-                                    <img src="./static/png/logo.png" alt="服务器图标" class="w-full h-full object-cover">
-                                </div>
-                                
-                                <div class="text-center md:text-left">
-                                    <h3 class="text-2xl font-bold text-mtr-orange mb-1">金尚市轨交 JTR Server</h3>
-                                    <p class="text-gray-300">kr-nc-bgp-1.ofalias.net:21468</p>
-                                    <div class="flex items-center justify-center md:justify-start mt-2">
-                                        <span id="statusIndicator" class="w-3 h-3 rounded-full bg-yellow-500 mr-2 pulse"></span>
-                                        <span id="serverStatus" class="text-sm">正在查询... | Now Loading</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- 服务器详细状态 -->
-                            <div class="w-full md:w-2/3 bg-mtr-dark/40 backdrop-blur-sm rounded-lg p-4 border border-mtr-orange/20">
-                                <div class="grid grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <p class="text-gray-400 text-sm">在线玩家 | Online Player</p>
-                                        <p id="playerCount" class="text-xl font-bold">--/--</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-gray-400 text-sm">延迟 | Latency</p>
-                                        <p id="pingTime" class="text-xl font-bold">-- ms</p>
-                                    </div>
-                                </div>
-                                
-                                <!-- 玩家进度条 -->
-                                <div class="mb-4">
-                                    <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                        <div id="playerBar" class="h-full bg-mtr-orange rounded-full transition-all duration-500" style="width: 0%"></div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 版本信息 -->
-                                <div class="flex justify-between text-sm text-gray-400">
-                                    <span>版本 | Version: 1.20.1Forge</span>
-                                    <span id="lastUpdated">最后更新 | Last Updated: --</span>
-                                </div>
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">1</div>
+                            <div>
+                                <p data-lang-zh="复制左边的链接" data-lang-en="Copy the link on the left">复制左边的链接</p>
                             </div>
                         </div>
-                        
-                        <!-- 在线玩家列表 -->
-                        <div class="mt-6 bg-mtr-dark/30 backdrop-blur-sm rounded-lg p-4 border border-mtr-orange/20">
-                            <h4 class="font-bold text-mtr-orange mb-2 flex items-center">
-                                <i class="fa fa-users mr-2"></i> 在线玩家 |Online Player
-                            </h4>
-                            <div id="playerList" class="flex flex-wrap gap-2">
-                                <span class="text-gray-400 text-sm">加载中... | Laoding...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 刷新按钮 -->
-                <button id="refreshStatus" class="w-full bg-mtr-orange hover:bg-mtr-darkorange text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center">
-                    <i class="fa fa-refresh mr-2"></i> 刷新状态 | Refresh Status
-                </button>
-            </div>
-        </div>
-    </section>
 
-    <!-- 加入我们 -->
-    <section id="join" class="py-20 bg-gradient-to-b from-mtr-gray/40 to-mtr-dark">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange">加入我们 | Join Us</h2>
-                <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
-                <p class="mt-4 max-w-2xl mx-auto">成为MTR金尚市轨道交通网络的一员</p>
-                <p class="mt-4 max-w-2xl mx-auto">Become a member of Jinshang Transit Railway network</p>
-            </div>
-            
-            <div class="max-w-4xl mx-auto bg-mtr-gray/30 rounded-2xl p-8 md:p-12 shadow-2xl border border-mtr-orange/20">
-                <div class="grid md:grid-cols-2 gap-10 items-center">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6 text-mtr-orange">服务器信息 | Server Information</h3>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center mb-2">
-                                <i class="fa fa-server text-mtr-orange mr-3 w-5 text-center"></i>
-                                <span class="font-bold">服务器IP | Server IP:</span>
-                            </div>
-                            <div class="ml-8 bg-mtr-dark p-3 rounded-lg border-l-4 border-mtr-orange">
-                                <p id="serverIp" class="font-mono cursor-pointer hover:text-mtr-orange transition-colors">kr-nc-bgp-1.ofalias.net:21468</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="ml-8">
-                                <p>Minecraft Transit Railway</p>
-                                <p class="text-sm text-gray-400">版本 | Version: 4.0.2HotFix</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center mb-2">
-                                <i class="fa fa-java text-mtr-orange mr-3 w-5 text-center"></i>
-                                <span class="font-bold">游戏版本 | Game Version:</span>
-                            </div>
-                            <div class="ml-8">
-                                <p>1.20.1Forge</p>
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">2</div>
+                            <div>
+                                <p data-lang-zh="粘贴到您的浏览器地址栏" data-lang-en="Paste into your browser address bar">粘贴到您的浏览器地址栏</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6 text-mtr-orange">加入步骤 | How To Join?</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">1</div>
-                                <div>
-                                    <h4 class="font-bold mb-1">前往Modrinth下载Mod</h4>
-                                    <h4 class="font-bold mb-1">Go to Modrinth to download the mod</h4>
-                                    <a class="inline-block border border-mtr-orange hover:bg-mtr-orange/20 text-white font-bold py-2 px-6 rounded-full transition-all" href="https://modrinth.com/modpack/mtr-urban-construction">点击下载 | Download</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">2</div>
-                                <div>
-                                    <p>在多人游戏中添加服务器，输入我们的IP地址</p>
-                                    <p>Add a server in multiplayer and enter our IP address</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8 p-4 bg-mtr-dark rounded-lg border border-mtr-orange/30">
-                            <h4 class="font-bold mb-2 flex items-center">
-                                <i class="fa fa-info-circle text-mtr-orange mr-2"></i> 玩家须知 | Pls Note:
-                            </h4>
-                            <p class="text-sm">请遵守服务器规则，爱护公共设施，共同维护轨道交通网络的秩序和发展</p>
-                            <p class="text-sm">Please abide by the server rules, take care of public facilities, and jointly maintain the order and development of the rail transit network</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 联系我们 -->
-    <section id="context" class="py-20 bg-gradient-to-b from-mtr-gray/40 to-mtr-dark">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-mtr-orange">联系我们 | Context Us</h2>
-                <div class="w-24 h-1 bg-mtr-orange mx-auto rounded-full"></div>
-                <p class="mt-4 max-w-2xl mx-auto">发现问题，及时汇报</p>
-                <p class="mt-4 max-w-2xl mx-auto">Find problems and report them promptly</p>
-            </div>
-            
-            <div class="max-w-4xl mx-auto bg-mtr-gray/30 rounded-2xl p-8 md:p-12 shadow-2xl border border-mtr-orange/20">
-                <div class="grid md:grid-cols-2 gap-10 items-center">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6 text-mtr-orange">加入群聊 | Join a group chat</h3>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center mb-2">
-                                <span class="font-bold">Discord邀请链接 | Discord Invite Link:</span>
-                            </div>
-                            <div class="ml-8 bg-mtr-dark p-3 rounded-lg border-l-4 border-mtr-orange">
-                                <p id="serverIp" class="font-mono cursor-pointer hover:text-mtr-orange transition-colors">https://discord.gg/kVtBeyw5fm</p>
-                            </div>
-                        </div>
-                                                <div class="mb-6">
-                            <div class="flex items-center mb-2">
-                                <span class="font-bold">QQ邀请链接 | QQ Invite Link:</span>
-                            </div>
-                            <div class="ml-8 bg-mtr-dark p-3 rounded-lg border-l-4 border-mtr-orange">
-                                <p id="serverIp" class="font-mono cursor-pointer hover:text-mtr-orange transition-colors">https://qm.qq.com/q/OCKnveZMA</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="ml-8">
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center mb-2">
-                                <i class="fa fa-java text-mtr-orange mr-3 w-5 text-center"></i>
-                            </div>
-                            <div class="ml-8">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6 text-mtr-orange">加入步骤 | How To Join?</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">1</div>
-                                <div>
-                                    <h4 class="font-bold mb-1">复制左边的链接</h4>
-                                    <h4 class="font-bold mb-1">Copy the link on the left</h4>
-                                </div>
-                            </div>
-                            
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-8 h-8 bg-mtr-orange rounded-full flex items-center justify-center font-bold mr-4">2</div>
-                                <div>
-                                    <p>粘贴到您的浏览器地址栏</p>
-                                    <p>Paste into your browser address bar</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8 p-4 bg-mtr-dark rounded-lg border border-mtr-orange/30">
-                            <h4 class="font-bold mb-2 flex items-center">
-                                <i class="fa fa-info-circle text-mtr-orange mr-2"></i> 玩家须知 | Pls Note:
-                            </h4>
-                            <p class="text-sm">请遵守规则，禁止出现辱骂他人现象，共同维护网络秩序</p>
-                            <p class="text-sm">Please abide by the rules, refrain from making remarks that insult others, and work together to maintain order on the Internet.</p>
-                        </div>
+                    <div class="mt-8 p-4 bg-mtr-dark rounded-lg border border-mtr-orange/30">
+                        <h4 class="font-bold mb-2 flex items-center" data-lang-zh="玩家须知" data-lang-en="Pls Note:">
+                            <i class="fa fa-info-circle text-mtr-orange mr-2"></i> 玩家须知
+                        </h4>
+                        <p class="text-sm" data-lang-zh="请遵守规则，禁止出现辱骂他人现象，共同维护网络秩序"
+                           data-lang-en="Please abide by the rules, refrain from making remarks that insult others, and work together to maintain order on the Internet">
+                           请遵守规则，禁止出现辱骂他人现象，共同维护网络秩序
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     <!-- 页脚 -->
-    <footer class="bg-mtr-dark py-12 border-t border-mtr-orange/30">
-            <div class="mt-12 pt-6 border-t border-mtr-orange/20 text-center text-sm text-gray-500">
-                <p>2026 金尚市服务器 - 保留所有权利</p>
-                <p class="mt-1">2025 JTR Server - All Rights Reserved</p>
-            </div>
+    <footer class="bg-mtr-dark py-12 border-t border-mtr-orange/30 text-center text-sm text-gray-500">
+        <p>2026 金尚市服务器 - 保留所有权利</p>
+        <p class="mt-1">2026 JTR Server - All Rights Reserved</p>
     </footer>
 
     <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 导航栏滚动效果
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('shadow-lg', 'bg-mtr-dark');
-                    navbar.classList.remove('bg-mtr-dark/90');
-                } else {
-                    navbar.classList.remove('shadow-lg', 'bg-mtr-dark');
-                    navbar.classList.add('bg-mtr-dark/90');
-                }
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('shadow-lg', 'bg-mtr-dark');
+            navbar.classList.remove('bg-mtr-dark/90');
+        } else {
+            navbar.classList.remove('shadow-lg', 'bg-mtr-dark');
+            navbar.classList.add('bg-mtr-dark/90');
+        }
+    });
+
+    // 移动端菜单切换
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    // ---------------- 平滑滚动 ----------------
+ function smoothScrollTo(targetSelector, duration = 500) {
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    const navbarHeight = document.getElementById('navbar').offsetHeight;
+    const targetY = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        // 使用缓动函数（easeInOutCubic）
+        const ease = progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+        window.scrollTo(0, startY + distance * ease);
+
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    requestAnimationFrame(animation);
+}
+
+// 桌面 + 移动端统一绑定
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        smoothScrollTo(this.getAttribute('href'), 600); // 600ms 动画时间
+
+        // 隐藏移动端菜单（如果打开了）
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (!mobileMenu.classList.contains('hidden')) {
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+        }
+    });
+});
+    // -----------------------------------------
+
+    // 服务器IP复制功能
+    document.querySelectorAll('.server-ip').forEach(elem => {
+        elem.addEventListener('click', function() {
+            navigator.clipboard.writeText(this.textContent).then(() => {
+                const originalText = this.textContent;
+                this.textContent = '已复制! | Copied!';
+                this.classList.add('text-green-400');
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.classList.remove('text-green-400');
+                }, 2000);
             });
-            
-            // 移动端菜单切换
-            document.getElementById('menuToggle').addEventListener('click', function() {
-                document.getElementById('mobileMenu').classList.toggle('hidden');
-            });
-            
-            // 平滑滚动
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.getElementById('mobileMenu').classList.add('hidden');
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // 服务器IP复制功能
-            document.getElementById('serverIp').addEventListener('click', function() {
-                navigator.clipboard.writeText(this.textContent).then(() => {
-                    const originalText = this.textContent;
-                    this.textContent = '已复制! | Coyied!';
-                    this.classList.add('text-green-400');
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                        this.classList.remove('text-green-400');
-                    }, 2000);
-                });
-            });
-            
-            // 服务器状态查询功能
-            const serverIp = "kr-nc-bgp-1.ofalias.net:21468";
-            const statusElements = {
-                indicator: document.getElementById('statusIndicator'),
-                status: document.getElementById('serverStatus'),
-                playerCount: document.getElementById('playerCount'),
-                playerBar: document.getElementById('playerBar'),
-                pingTime: document.getElementById('pingTime'),
-                playerList: document.getElementById('playerList'),
-                lastUpdated: document.getElementById('lastUpdated'),
-                refreshBtn: document.getElementById('refreshStatus')
-            };
-            
-            // 确保按钮引用正确
-            if (!statusElements.refreshBtn) {
-                console.error('未找到刷新按钮元素 | Refresh button element not found');
-            }
-            
-            function checkServerStatus() {
-                // 防止重复点击
-                if (statusElements.refreshBtn.classList.contains('btn-loading')) {
-                    return;
-                }
-                
-                // 更新加载状态
-                statusElements.indicator.className = 'w-3 h-3 rounded-full bg-yellow-500 mr-2 pulse';
-                statusElements.status.textContent = '正在查询... | Querying...';
-                statusElements.playerCount.textContent = '--/--';
-                statusElements.playerBar.style.width = '0%';
-                statusElements.pingTime.textContent = '-- ms';
-                statusElements.playerList.innerHTML = '<span class="text-gray-400 text-sm">加载中... | Loading...</span>';
-                statusElements.refreshBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin mr-2"></i> 查询中... | Querying...';
-                statusElements.refreshBtn.classList.add('btn-loading');
-                
-                // 使用缓存清除参数确保获取最新数据
-                const timestamp = new Date().getTime();
-                fetch(`https://api.mcsrvstat.us/2/${serverIp}?t=${timestamp}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('服务器响应错误 | Server Response Error');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // 更新最后更新时间
-                        const now = new Date();
-                        statusElements.lastUpdated.textContent = `最后更新 | Last Update: ${now.toLocaleTimeString()}`;
-                        
-                        if (data.online) {
-                            // 服务器在线状态
-                            statusElements.indicator.className = 'w-3 h-3 rounded-full bg-green-500 mr-2';
-                            statusElements.status.textContent = '服务器在线 | Server Online';
-                            
-                            // 提取并显示玩家数据
-                            const players = data.players || { online: 0, max: 0 };
-                            statusElements.playerCount.textContent = `${players.online}/${players.max}`;
-                            
-                            // 计算玩家进度条
-                            const percentage = players.max > 0 ? (players.online / players.max) * 100 : 0;
-                            statusElements.playerBar.style.width = `${percentage}%`;
-                            
-                            // 显示延迟
-                            statusElements.pingTime.textContent = `${data.ping || '--'} ms`;
-                            
-                            // 显示玩家列表
-                            if (players.online > 0 && players.list) {
-                                statusElements.playerList.innerHTML = '';
-                                players.list.forEach(player => {
-                                    const tag = document.createElement('span');
-                                    tag.className = 'bg-mtr-orange/20 text-mtr-light px-2 py-1 rounded text-sm';
-                                    tag.textContent = player;
-                                    statusElements.playerList.appendChild(tag);
-                                });
-                            } else {
-                                statusElements.playerList.innerHTML = '<span class="text-gray-400 text-sm">当前没有玩家在线 | No Player Online</span>';
-                            }
-                        } else {
-                            // 服务器离线状态
-                            statusElements.indicator.className = 'w-3 h-3 rounded-full bg-red-500 mr-2';
-                            statusElements.status.textContent = '服务器离线 | Server Offline';
-                            statusElements.playerList.innerHTML = '<span class="text-gray-400 text-sm">服务器当前未运行 | The server is not currently running</span>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('查询失败 | Query Failed:', error);
-                        statusElements.indicator.className = 'w-3 h-3 rounded-full bg-red-500 mr-2';
-                        statusElements.status.textContent = '查询失败 | Query Failed';
-                        statusElements.playerList.innerHTML = '<span class="text-gray-400 text-sm">请稍后重试 | Pls Try It Later</span>';
-                        
-                        // 更新最后更新时间
-                        const now = new Date();
-                        statusElements.lastUpdated.textContent = `最后更新 | Last Update: ${now.toLocaleTimeString()}`;
-                    })
-                    .finally(() => {
-                        // 恢复按钮状态
-                        statusElements.refreshBtn.innerHTML = '<i class="fa fa-refresh mr-2"></i> 刷新状态 |Refresh Update';
-                        statusElements.refreshBtn.classList.remove('btn-loading');
-                    });
-            }
-            
-            // 初始化查询
-            checkServerStatus();
-            
-            // 绑定刷新按钮点击事件（确保正确绑定）
-            if (statusElements.refreshBtn) {
-                // 先移除可能存在的旧事件监听
-                statusElements.refreshBtn.removeEventListener('click', checkServerStatus);
-                // 添加新的事件监听
-                statusElements.refreshBtn.addEventListener('click', checkServerStatus);
-            }
-            
-            // 自动刷新
-            setInterval(checkServerStatus, 60000);
         });
-    </script>
+    });
+
+// 下拉菜单显示/隐藏
+    const langBtn = document.getElementById('language-btn');
+    const languageMenu = document.getElementById('language-menu');
+    const mobileLanguageSwitch = document.getElementById('mobileLanguageSwitch');
+
+    // 切换显示下拉菜单
+    langBtn.addEventListener('click', () => {
+        languageMenu.classList.toggle('hidden');
+    });
+
+    // 点击菜单项切换语言
+    languageMenu.querySelectorAll('a[data-lang]').forEach(item => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            const lang = item.getAttribute('data-lang');
+            switchLanguage(lang);
+            languageMenu.classList.add('hidden');
+        });
+    });
+
+    // 移动端下拉选择切换语言
+    mobileLanguageSwitch.addEventListener('change', e => {
+        const lang = e.target.value === 'zh-CN' ? 'zh' : 'en';
+        switchLanguage(lang);
+    });
+
+    // 统一语言切换函数
+    function switchLanguage(lang) {
+        document.querySelectorAll('[data-lang-zh]').forEach(el => {
+            el.textContent = lang === 'zh' ? el.getAttribute('data-lang-zh') : el.getAttribute('data-lang-en');
+        });
+
+        // 改变按钮文字
+        langBtn.textContent = lang === 'zh' ? 'Language' : '语言';
+        if (mobileLanguageSwitch) {
+            mobileLanguageSwitch.value = lang === 'zh' ? 'zh-CN' : 'en-US';
+        }
+    }
+
+    // 初始化语言（默认中文）
+    switchLanguage('zh');
+});
+</script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
