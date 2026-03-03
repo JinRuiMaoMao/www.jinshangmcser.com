@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金尚市轨道交通 - JTR</title>
     <link rel="icon" href="./static/png/mtr_logo.png" type="image/png">
+
+        <script>
+        (function () {
+            const savedLang = localStorage.getItem('siteLanguage');
+            const browserLang = navigator.language.startsWith('zh') ? 'zh' : 'en';
+            const lang = savedLang ? savedLang : browserLang;
+
+            document.documentElement.setAttribute('data-lang', lang);
+        })();
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
@@ -26,6 +37,12 @@
             }
         }
     </script>
+
+    <style>
+    html {
+        visibility: hidden;
+    }
+</style>
     
     <style type="text/tailwindcss">
         @layer utilities {
@@ -89,19 +106,18 @@ section {
 
     <!-- 中间菜单（桌面端显示） -->
     <div class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2">
-      <!--<a href="#home" class="hover:text-mtr-orange transition-colors">首页</a>-->
-      <a href="#about" class="hover:text-mtr-orange transition-colors">关于MTR</a>
-      <a href="#status" class="hover:text-mtr-orange transition-colors">服务器状态</a>
-      <a href="#join" class="hover:text-mtr-orange transition-colors">加入我们</a>
-      <a href="#context" class="hover:text-mtr-orange transition-colors">联系我们</a>
+      <!--<a href="#home" class="hover:text-mtr-orange transition-colors" data-lang-zh="首页" data-lang-en="home">首页</a>-->
+      <a href="#about" class="hover:text-mtr-orange transition-colors" data-lang-zh="关于MTR" data-lang-en="About MTR">关于MTR</a>
+      <a href="#status" class="hover:text-mtr-orange transition-colors" data-lang-zh="服务器状态" data-lang-en="Server Status">服务器状态</a>
+      <a href="#join" class="hover:text-mtr-orange transition-colors" data-lang-zh="加入我们" data-lang-en="Join Us">加入我们</a>
+      <a href="#context" class="hover:text-mtr-orange transition-colors" data-lang-zh="联系我们" data-lang-en="Contact Us">联系我们</a>
     </div>
 
     <!-- 右侧：语言切换 + 移动端汉堡按钮 -->
     <div class="flex items-center space-x-3">
       <!-- 语言切换 -->
       <div class="relative inline-block text-left">
-        <button id="language-btn" class="bg-mtr-orange hover:bg-orange-600 px-3 py-1 rounded font-semibold text-sm">
-          语言 | Language
+        <button id="language-btn" class="bg-mtr-orange hover:bg-orange-600 px-3 py-1 rounded font-semibold text-sm" data-lang-zh="语言" data-lang-en="Language">语言 Language
         </button>
         <div id="language-menu" class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-mtr-gray ring-1 ring-black ring-opacity-5 hidden">
           <div class="py-1">
@@ -122,11 +138,11 @@ section {
   <!-- 移动端菜单（下拉） -->
   <div id="mobileMenu" class="hidden md:hidden bg-mtr-dark/95 backdrop-blur-md border-t border-mtr-orange/30">
     <div class="container mx-auto px-4 py-3 flex flex-col items-center space-y-4">
-      <a href="#home" class="hover:text-mtr-orange transition-colors py-2">首页</a>
-      <a href="#about" class="hover:text-mtr-orange transition-colors py-2">关于MTR</a>
-      <a href="#status" class="hover:text-mtr-orange transition-colors py-2">服务器状态</a>
-      <a href="#join" class="hover:text-mtr-orange transition-colors py-2">加入我们</a>
-      <a href="#contact" class="hover:text-mtr-orange transition-colors py-2">联系我们</a>
+      <a href="#home" class="hover:text-mtr-orange transition-colors py-2" data-lang-zh="首页" data-lang-en="home">首页</a>
+      <a href="#about" class="hover:text-mtr-orange transition-colors py-2" data-lang-zh="关于MTR" data-lang-en="About MTR">关于MTR</a>
+      <a href="#status" class="hover:text-mtr-orange transition-colors py-2" data-lang-zh="服务器状态" data-lang-en="Server Status">服务器状态</a>
+      <a href="#join" class="hover:text-mtr-orange transition-colors py-2" data-lang-zh="加入我们" data-lang-en="Join Us">加入我们</a>
+      <a href="#contact" class="hover:text-mtr-orange transition-colors py-2" data-lang-zh="联系我们" data-lang-en="Contact Us">联系我们</a>
       <select id="mobileLanguageSwitch" class="bg-mtr-dark border border-mtr-orange text-white rounded px-2 py-1 mt-2">
         <option value="zh-CN">中文</option>
         <option value="en-US">English</option>
@@ -682,21 +698,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         switchLanguage(lang);
     });
 
-    // 统一语言切换函数
-    function switchLanguage(lang) {
-        document.querySelectorAll('[data-lang-zh]').forEach(el => {
-            el.textContent = lang === 'zh' ? el.getAttribute('data-lang-zh') : el.getAttribute('data-lang-en');
-        });
+// 统一语言切换函数
+function switchLanguage(lang) {
+    document.querySelectorAll('[data-lang-zh]').forEach(el => {
+        el.textContent = lang === 'zh'
+            ? el.getAttribute('data-lang-zh')
+            : el.getAttribute('data-lang-en');
+    });
 
-        // 改变按钮文字
-        langBtn.textContent = lang === 'zh' ? 'Language' : '语言';
-        if (mobileLanguageSwitch) {
-            mobileLanguageSwitch.value = lang === 'zh' ? 'zh-CN' : 'en-US';
-        }
+    langBtn.textContent = lang === 'zh' ? 'Language' : '语言';
+
+    if (mobileLanguageSwitch) {
+        mobileLanguageSwitch.value = lang === 'zh' ? 'zh-CN' : 'en-US';
     }
 
-    // 初始化语言（默认中文）
-    switchLanguage('zh');
+    localStorage.setItem('siteLanguage', lang);
+
+    // ⭐ 语言处理完成后再显示页面
+    document.documentElement.style.visibility = 'visible';
+}
+
+    // 初始化语言
+const savedLang = localStorage.getItem('siteLanguage');
+switchLanguage(savedLang ? savedLang : 'zh');
 });
 </script>
 </body>
